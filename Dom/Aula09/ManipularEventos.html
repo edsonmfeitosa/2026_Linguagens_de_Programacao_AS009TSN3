@@ -17,6 +17,7 @@
     </p>
 </body>
 <script>
+    //maneira imperativa
     function carregarTela() {
         alert('Tela carregada!');
     }
@@ -29,5 +30,13 @@
     function passouMouse() {
         alert('Tira o mouse daí!!!!');
     }
+    //maneira declarativa - escutador de eventos
+    let caixaTexto = document.querySelector('#palavra');
+    caixaTexto.addEventListener('focusin', function() {
+        console.log('Caixa de texto focada');
+    });
+    caixaTexto.addEventListener('focusout', () => {
+        console.log('Caixa de texto desfocada');
+    });
 </script>
 </html>
