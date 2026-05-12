@@ -8,6 +8,11 @@
   <body>
     <select name="pessoa" id="pessoa"></select>
     <hr />
+    <td>
+        <label for="pesquisaNome">Nome:</label>
+        <input type="text" id="pesquisaNome" name="pesquisaNome" placeholder="Digite o nome do aluno para pesquisar">
+        <button onclick="filtrar(event)">Filtrar</button>
+    </td>
     <table>
       <thead>
         <tr>
@@ -40,13 +45,13 @@
         option.textContent = pessoa.nome;
         selectPessoa.appendChild(option);
       });
-      montaTabela();
+      montaTabela(alunos);
     }
     dadosAPI();
-    async function montaTabela() {
+    async function montaTabela(listaAlunos) {
       let tbody = document.getElementById('dadosAlunos');
       tbody.innerHTML = '';
-      alunos.forEach(aluno => {
+      listaAlunos.forEach(aluno => {
         let tr = document.createElement('tr');
         let tdNome = document.createElement('td');
         tdNome.textContent = aluno.nome;
@@ -59,6 +64,14 @@
         tr.appendChild(tdTelefone);
         tbody.appendChild(tr);
       });
+    }
+    function filtrar(event) {
+        event.preventDefault();
+        let pesquisaNome = document.getElementById('pesquisaNome').value;
+        let alunosFiltrados = alunos.filter(aluno => 
+            aluno.nome.toLowerCase()
+            .includes(pesquisaNome.toLowerCase()));
+        montaTabela(alunosFiltrados);
     }
   </script>
 </html>
